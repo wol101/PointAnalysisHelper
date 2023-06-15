@@ -1,0 +1,41 @@
+Notes:
+
+When editing the saved PDF files in Illustrator, you need to use Object/Expand and select only Stroke. You can then separate the elements and the text still looks OK. Sadly the text is stored as outlines so editing is much harder than it should be (but the scaling is correct).
+
+To do:
+
+Check the window modified functions work properly - currently I don't think they do.
+
+Font size is a bit off - probably not worth worrying about
+
+Get copy and paste to work on the table elements (this is some suggested code but it apparently has a few bugs in the looping)
+
+QAbstractItemModel * model = view->model();
+QItemSelectionModel * selection = view->selectionModel()
+QModelIndexList indexes = selection->selectedIndexes();
+Then loop through the index list calling model->data(index) on each index. Convert the data to a string if it isn't already and concatenate each string together. Then you can use QClipboard.setText to paste the result to the clipboard. Note that, for Excel and Calc, each column is separated from the next by a newline ("\n") and each row is separated by a tab ("\t"). You have to check the indices to determine when you move to the next row.
+
+QString selected_text;
+// You need a pair of indexes to find the row changes
+QModelIndex previous = indexes.first();
+indexes.removeFirst();
+foreach(current, indexes)
+{
+    QVariant data = model->data(current);
+    QString text = data.toString();
+    // At this point `text` contains the text in one cell
+    selected_text.append(text);
+    // If you are at the start of the row the row number of the previous index
+    // isn't the same.  Text is followed by a row separator, which is a newline.
+    if (current.row() != previous.row())
+    {
+        selected_text.append('\n');
+    }
+    // Otherwise it's the same row, so append a column separator, which is a tab.
+    else
+    {
+        selected_text.append('\t');
+    }
+    previous = current;
+}
+QApplication.clipboard().setText(selected_text);

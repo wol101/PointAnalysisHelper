@@ -1,0 +1,23 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>images/copy.png</file>
+    <file>images/cut.png</file>
+    <file>images/new.png</file>
+    <file>images/open.png</file>
+    <file>images/paste.png</file>
+    <file>images/save.png</file>
+    <file>images/save-as.png</file>
+    <file>images/cursor-cross.png</file>
+    <file>Icon.iconset/icon_512x512@2x.png</file>
+    <file>images/zoom-in-3.png</file>
+    <file>images/zoom-out-3.png</file>
+    <file>images/zoom-original-2.png</file>
+    <file>images/go-next-view.png</file>
+    <file>images/go-previous-view.png</file>
+    <file>images/tools-wizard.png</file>
+    <file>images/view-object-histogram-linear.png</file>
+    <file>images/export-image-2.png</file>
+    <file>images/preferences-desktop.png</file>
+    <file>images/import-channels.png</file>
+</qresource>
+</RCC>
